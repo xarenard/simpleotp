@@ -1,0 +1,5 @@
+--slow 5000
+--reporter spec
+--check-leaks
+--use_strict
+--exit

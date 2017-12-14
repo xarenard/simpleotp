@@ -1,0 +1,47 @@
+{
+  "name": "simpleotp",
+  "version": "0.7.1",
+  "description": "OTP implementation according to rfc 4996 and rfc 6238",
+  "main": "./lib/index.js",
+  "engines":{
+    "node": ">6.9.4"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "lint": "eslint **/*.js",
+    "test": "mocha  test/*/*.js",
+    "coverage": "nyc mocha test/*/*.js --timeout=3000",
+    "doc": "jsdoc -c jsdoc.json -d docs -e utf8"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.13.0",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
+  },
+  "author": "Xavier Renard <xagithub@gmail.com>",
+  "keywords": [
+    "otp",
+    "hotp",
+    "totp",
+    "hmac",
+    "rfc4996",
+    "rfc_6238"
+  ],
+  "files": [
+    "lib"
+  ],
+  "bugs": { "url" : "https://github.com/xarenard/node_otp/issues",
+            "email" : "xagithub@gmail.com"
+  },
+  "license": "MIT",
+  "directories": {
+    "lib": "lib",
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": { "type" : "git",
+                "url" : "https://github.com/xarenard/node_otp.git"
+  }
+}

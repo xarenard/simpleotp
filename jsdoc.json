@@ -1,0 +1,27 @@
+{
+  "source": {
+    "include": [
+      "lib/otp.js",
+      "lib/hotp.js",
+      "package.json",
+      "README.md"
+    ]
+  },
+  "plugins": ["plugins/markdown",
+              "plugins/summarize"],
+  "templates": {
+    "applicationName": "Octopus",
+    "meta": {
+      "title": "Octopus",
+      "description": "Octopus - One-time password generator according to rfc 4996 and rfc 6238",
+      "keyword": "hotp totp one-Time password"
+    },
+    "default": {
+      "outputSourceFiles": true
+    },
+    "linenums": true
+  },
+  "opts": {
+    "destination": "docs"
+  }
+}
