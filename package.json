@@ -1,6 +1,6 @@
 {
   "name": "simpleotp",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "description": "OTP implementation according to rfc 4996 and rfc 6238",
   "main": "./lib/index.js",
   "engines":{
@@ -32,8 +32,9 @@
   "files": [
     "lib"
   ],
-  "bugs": { "url" : "https://github.com/xarenard/node_otp/issues",
-            "email" : "xagithub@gmail.com"
+  "bugs": {
+    "url" : "https://github.com/xarenard/node_otp/issues",
+    "email" : "xagithub@gmail.com"
   },
   "license": "MIT",
   "directories": {
@@ -42,6 +43,6 @@
     "test": "test"
   },
   "repository": { "type" : "git",
-                "url" : "https://github.com/xarenard/node_otp.git"
+                  "url" : "git://github.com/xarenard/simpleopt.git"
   }
 }
