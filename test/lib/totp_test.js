@@ -38,4 +38,38 @@ describe('HOTP use case', () => {
 		});
 	});
 
+	describe('step is undefined', function() {
+		it('Default 30 seconds should be picked up', () => {
+			const token = totp.createToken({ secret:'1234'});
+			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234'});
+			assert.equal(token, token2);
+			//totp.createTokenFromSeconds({secret: 'abcde'})
+
+		});
+	});
+
+	describe('step is null', function() {
+		it('Default 30 seconds should be picked up', () => {
+			const token = totp.createToken({ secret:'1234'});
+			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: null});
+			assert.equal(token, token2);
+		});
+	});
+
+	describe('step is a string', function() {
+		it('Default 30 seconds should be picked up', () => {
+			const token = totp.createToken({ secret:'1234'});
+			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: 'test'});
+			assert.equal(token, token2);
+		});
+	});
+
+	describe('step is float', function() {
+		it('Default 30 seconds should be picked up', () => {
+			const token = totp.createToken({ secret:'1234'});
+			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: 3.14 });
+			assert.equal(token, token2);
+		});
+	});
+
 });
