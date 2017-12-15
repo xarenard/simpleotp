@@ -5,11 +5,11 @@ Time-based and HMAC-based One-Time Password libraryfor node.js
 - [Installation](#installation)
 - [Usage](#usage)
     - [HOTP](#hotp)
-        - Generate a token
-        - Validate a token
+        - [Example](#hotp_example)
+        - [Configuration](#hotp_example)
     - [TOTP](#totp)
-        - Generate a token
-        - Validate a token
+        - [Example](#totp_example)
+        - [Configuration](#totp_example)
 - [Test](#test)
 - [References](#references)
 - [License](#license)
@@ -29,6 +29,7 @@ npm install --save simpleotp
 <a name="hotp"></a>
 ### HOTP
 
+<a name="hotp_example"></a>
 
 #### Example
 ```js
@@ -39,11 +40,46 @@ const hotp = new otp.Hotp();
 const token = hotp.createToken({secret:'12345678901234567890',counter:7});
 
 // validate the token
-const data = {token: token, secret:'12345678901234567890',counter: 7}
-const valid = hotp.validate(data) //true
+const data = {token: token, secret:'12345678901234567890',counter: 7};
+const valid = hotp.validate(data); //true
 ```
-### TOTP
+<a name="totp_configuration"></a>
+#### Configuration
 
+##### Constructor options
+
+
+| Option    |  Value              | Description           |Default Value    |
+| ------------ | ---------------------- | ----------------------- | ----------- 
+|algorithm   | sha1,sha256,sha512   |  Algorithm to use     | sha1      |
+|num_digits  | integer              | token length          |6          |
+|encoding    | ascii                | Encoding of the secret| ascii     |
+
+
+##### Create Token options
+
+| Option    | Mandatory | Value                   | Description                            | Default value         |
+|------------|-----------|---------------------------|----------------------------------------|-----------------|
+|secret      | y         |string type                | Share secret to use                    | N/A             |
+|counter     | y         |integer type               | The counter seed                       | N/A             |
+|algorithm   | n         |'sha1','sha256' or 'sha512'| Algorithm to use                       | sha1            |
+|num_digits  | n         |integer type               | token length                           | 6               |
+|encoding    | n         |'ascii'                    | Encoding of the secret                 | ascii           |
+
+##### Validate token options
+
+| Option     | Mandatory | Value                     | Description                            | Default value          |
+|------------|-----------|---------------------------|----------------------------------------|-----------------|
+|token       | y         |string type                | The original token                     | N/A             |
+|secret      | y         |string type                | Share secret to use                    | N/A             |
+|counter     | y         |integer type               | The counter seed                       | N/A             |
+|algorithm   | n         |'sha1','sha256' or 'sha512'| Algorithm to use                       | sha1            |
+|num_digits  | n         |integer type               | token length                           | 6               |
+|encoding    | n         |'ascii'                    | Encoding of the secret                 | ascii           |
+       
+
+### TOTP
+<a name="totp_example"></a>
 #### Example
 ```js
 const otp = require('simpleotp');
@@ -57,6 +93,37 @@ const data = {token: token, secret:'12345678901234567890',seconds :Date.now()/10
 const valid = totp.validate(data)
 console.log(valid); // true
 ```
+<a name="totp_example"></a>
+#### Configuration
+
+##### Constructor options
+| Option     |  Value              | Description                             |Default value          |
+|------------|----------------------|-----------------------------------------|-----------------|
+|algorithm   | 'sha1','sha256' or 'sha512'   | Algorithm to use                        |sha1            |
+|num_digits  | integer              | token length                            |6                |
+|encoding    | ascii                | Encoding of the secret                  |ascii           |
+|step        | integer              | Number of the second the token is valid |30               |
+
+##### Create Token options
+| Option    | Mandatory | Value                    | Description                            | Default value         |
+|------------|-----------|---------------------------|----------------------------------------|-----------------|
+|secret      | y         | string type                | Share secret to use                    | N/A             |
+|seconds     | y         | integer                   | time in seconds as counter              | Date.now()/1000 |
+|step        | n         | integer                    | Number of the second the token is valid| 30              |
+|algorithm   | n         | 'sha1','sha256' or 'sha512'| Algorithm to use                       | sha1            |
+|num_digits  | n         | integer type               | token length                           | 6               |
+|encoding    | n         | 'ascii'                    | Encoding of the secret                 | ascii           |
+
+##### Validate token options
+| Option     | Mandatory | Value                     | Description                            |Default value          |
+|------------|-----------|---------------------------|----------------------------------------|-----------------|
+|token       | y         | string type                | The original token                     | N/A             |
+|secret      | y         | string type                | Share secret to use                    | N/A             |
+|seconds     | Y         | integer                   | time in seconds as counter             | Date.now()/1000 |
+|step        | n         | integer                    | Number of the second the token is valid| 30              |
+|algorithm   | n         | 'sha1','sha256' or 'sha512'| Algorithm to use                       | sha1            |
+|num_digits  | n         | integer type               | token length                           | 8               |
+|encoding    | n         | 'ascii'                    | Encoding of the secret                 | ascii           |
 
 <a name="tests"></a>
 ## Tests
