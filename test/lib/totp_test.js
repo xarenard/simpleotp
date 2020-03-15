@@ -5,7 +5,15 @@ const chai = require('chai');
 const assert = chai.assert;
 const expect = chai.expect;
 
-describe('HOTP use case', () => {
+const secret = '12345678901234567890';
+
+const zeroPaddingTestDatas = [
+	{ seconds: 3060, algorithm: 'sha1', expected_token: '00629694' },
+	{ seconds: 4620, algorithm: 'sha256', expected_token: '00836417' },
+	{ seconds: 5100, algorithm: 'sha512', expected_token: '00458766' }
+];
+
+describe('TOTP use case', () => {
 
 	let totp = null;
 
@@ -72,4 +80,26 @@ describe('HOTP use case', () => {
 		});
 	});
 
+	describe('Double Zero Padding - Generating token', () => {
+		//var totp = new Totp();
+		zeroPaddingTestDatas.forEach((data) => {
+			it('Ascii secret ' + secret + ' and ' + data.seconds + ' second should give token ' + data.expected_token, () => {
+				const totp = new Totp({num_digits: 8, algorithm: data.algorithm});
+				const token = totp.createToken({seconds: data.seconds, secret: secret});
+				assert.equal(token, data.expected_token);
+			});
+		});
+	});
+
+	describe('Double Zero Padding - Validate token', () => {
+		//var totp = new Totp();
+		zeroPaddingTestDatas.forEach((data) => {
+			it('Ascii secret ' + secret + ' and ' + data.seconds + ' second should give token ' + data.expected_token, () => {
+				const totp = new Totp({num_digits: 8});
+				const token = totp.createToken({seconds: data.seconds, secret: secret,algorithm: data.algorithm});
+				totp.validate({token: token, seconds: data.seconds,secret: secret,algorithm:data.algorithm});
+				assert.equal(token, data.expected_token);
+			});
+		});
+	});
 });
