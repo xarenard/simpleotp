@@ -1,6 +1,6 @@
 {
   "name": "simpleotp",
-  "version": "0.7.5",
+  "version": "0.7.7",
   "description": "OTP implementation according to rfc 4996 and rfc 6238",
   "main": "./lib/index.js",
   "engines": {
