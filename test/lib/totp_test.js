@@ -17,10 +17,10 @@ describe('TOTP use case', () => {
 
 	let totp = null;
 
-	beforeEach('HOTP instancation', function() {
+	beforeEach('HOTP instancation', () => {
 		totp = new Totp();
 	});
-	describe('secret not  being defined', function() {
+	describe('secret not  being defined', () => {
 		it('should throw error', () => {
 			expect(function() {
 				totp.createToken({seconds: 59});
@@ -28,7 +28,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('secret being  null', function() {
+	describe('secret being  null', () => {
 		it('should throw error', () => {
 			expect(function() {
 				totp.createToken({seconds: 59,secret: null});
@@ -36,7 +36,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('seconds is not defined', function() {
+	describe('seconds is not defined', () => {
 		it('current time should be pickup', () => {
 			const token = totp.createToken({ secret:'1234'});
 			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234'});
@@ -46,7 +46,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('step is undefined', function() {
+	describe('step is undefined', () => {
 		it('Default 30 seconds should be picked up', () => {
 			const token = totp.createToken({ secret:'1234'});
 			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234'});
@@ -56,7 +56,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('step is null', function() {
+	describe('step is null', () => {
 		it('Default 30 seconds should be picked up', () => {
 			const token = totp.createToken({ secret:'1234'});
 			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: null});
@@ -64,7 +64,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('step is a string', function() {
+	describe('step is a string', () => {
 		it('Default 30 seconds should be picked up', () => {
 			const token = totp.createToken({ secret:'1234'});
 			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: 'test'});
@@ -72,7 +72,7 @@ describe('TOTP use case', () => {
 		});
 	});
 
-	describe('step is float', function() {
+	describe('step is float', () => {
 		it('Default 30 seconds should be picked up', () => {
 			const token = totp.createToken({ secret:'1234'});
 			const token2 = totp.createToken({seconds: Date.now() /1000,secret:'1234',step: 3.14 });

@@ -60,13 +60,13 @@ const expectedTokens = [
 	['2679dc69', 645520489]
 ];
 
-describe('RFC 4996 - HOTP use cases', function () {
+describe('RFC 4996 - HOTP use cases', () => {
 
-	describe('HOTP token with ascii secret: ' + asciiSecret, function () {
+	describe('HOTP token with ascii secret: ' + asciiSecret, () => {
 		const hotp = new Hotp();
-		expectedTokens.forEach(function (expectedToken, counter) {
+		expectedTokens.forEach((expectedToken, counter) => {
 			let expectedTokenTruncated = expectedToken[1].toString().slice(-6);
-			it('Should be equal to ' + expectedTokenTruncated + ' with counter ' + counter, function () {
+			it('Should be equal to ' + expectedTokenTruncated + ' with counter ' + counter, () => {
 				const data  = { counter: counter, secret: asciiSecret};
 				let token = hotp.createToken(data);
 				assert.equal(token, expectedTokenTruncated);
@@ -74,12 +74,12 @@ describe('RFC 4996 - HOTP use cases', function () {
 		});
 	});
 
-	describe('HOTP token with hexadecimal secret: ' + hexSecret, function () {
+	describe('HOTP token with hexadecimal secret: ' + hexSecret,  () => {
 		const hotp = new Hotp();
 		const num_digits = hotp.getOptions().num_digits;
-		expectedTokens.forEach(function (expectedToken, counter) {
+		expectedTokens.forEach((expectedToken, counter) => {
 			let expectedTokenTruncated = expectedToken[1].toString().slice(-num_digits);
-			it('Should be equal to ' + expectedTokenTruncated + ' with counter ' + counter, function () {
+			it('Should be equal to ' + expectedTokenTruncated + ' with counter ' + counter, () => {
 				const data  = { counter: counter,secret: hexSecret,encoding: 'hex'};
 				let token = hotp.createToken(data);
 				assert.equal(token, expectedTokenTruncated);
@@ -88,12 +88,12 @@ describe('RFC 4996 - HOTP use cases', function () {
 		});
 	});
 
-	describe('Token Validation with ascii secret:' + asciiSecret, function () {
-		expectedTokens.forEach(function(expectedToken, counter){
+	describe('Token Validation with ascii secret:' + asciiSecret, () => {
+		expectedTokens.forEach((expectedToken, counter) =>{
 			let hotp = new Hotp();
 			let token = hotp.createToken({counter: counter,secret: asciiSecret});
 
-			it('And token '+ expectedToken[1].toString().slice(-6) +' with counter '+ counter +' should be valid', function () {
+			it('And token '+ expectedToken[1].toString().slice(-6) +' with counter '+ counter +' should be valid', () => {
 
 				const isValid = hotp.validate({token:token, counter:counter, secret:asciiSecret, window: 0});
 				assert.isTrue(isValid);
